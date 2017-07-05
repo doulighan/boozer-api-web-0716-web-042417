@@ -1,3 +1,4 @@
+require "pry"
 module Api
   module V1
     class CocktailsController < ApplicationController
@@ -15,6 +16,7 @@ module Api
         @cocktail = Cocktail.new(cocktail_params)
         if @cocktail.save 
           render json: @cocktail
+          
         else
           render json: @cocktail.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,7 @@ module Api
       end
 
       def cocktail_params
-        params.require(:cocktail).permit(:name, :description)
+        params.permit(:name, :description)
       end
     end
   end
